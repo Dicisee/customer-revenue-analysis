@@ -1,44 +1,47 @@
-# Customer Revenue and Retention Case Study (2015–2017)
+# Customer Revenue Analysis
 
-## Deliverables
-- `sql/01_...sql` through `sql/10_...sql`: ten requested SQL analyses (SQLite).
-- `sql/all_10_queries.sql`: all ten queries in one file.
-- `sql/setup.sql`: create `customer_year` from a manually imported `staging_orders` table.
-- `analyze.py`: independently reproduces calculations from the original `Case Study.zip` and checks each SQL result.
-- `data/tableau_yearly_metrics.csv`: aggregate, Tableau-ready metrics (no customer email identifiers).
-- `data/validation.json`: row counts and validation information.
-- `dashboard_preview.png`: illustrative dashboard preview; **not a published Tableau dashboard**.
+## Project Overview
 
-## Reproduce
-1. Place the original `Case Study.zip` in this repository folder locally (do **not** upload it to GitHub), or provide its location using `--input`.
-2. Run `python analyze.py --input "Case Study.zip"` with Python 3, or specify another path such as `python analyze.py --input "C:/Users/you/Downloads/Case Study.zip"`. No third-party Python packages are needed for the data calculations.
-3. The script uses an in-memory SQLite database and compares all 10 SQL outputs to independently computed customer-year set metrics.
-4. Alternatively, import `casestudy.csv` into SQLite as `staging_orders` (columns `customer_email`, `net_revenue`, `year`), run `sql/setup.sql`, then execute the ten queries.
+For this project, I analyzed customer and revenue data from 2015 to 2017 to better understand how revenue changed over time, how many customers were gained or lost, and how new and existing customers contributed to overall revenue.
 
-## Definitions and caveats
-- A customer is identified by normalized `LOWER(TRIM(customer_email))`.
-- Revenue is aggregated at the customer/year level before comparisons; amounts are computed in integer cents.
-- **New customer** means present in current year but absent in the **immediately previous year**, even if present in an older year. **Lost customer** means present in prior year but absent in current year.
-- Existing-customer growth = revenue of retained customers in current year minus revenue of those same customers in prior year.
-- Attrition revenue = **prior-year** revenue of customers absent in current year, reported as a positive amount.
-- 2015 has no 2014 baseline; prior-year-dependent metrics are **N/A**, not zero.
-- Total customers are distinct customer identifiers within each year. In this dataset, one row corresponds to each customer/year.
+I wanted to go beyond just looking at the numbers and create something that would make the results easier to understand.
 
-## Data checks
-- Total current-year revenue = new customer revenue + existing customer revenue current year.
-- Revenue change vs prior year = new customer revenue + existing customer growth − revenue lost from attrition.
-- Current customers = new customers + retained customers; prior customers = lost customers + retained customers.
-- All 10 SQL results were checked against independent Python set-based calculations.
+## Tools Used
 
-## Tableau dashboard instructions
-1. Open Tableau Public or Tableau Desktop and connect to `data/tableau_yearly_metrics.csv` as a **Text file**.
-2. Treat `Year` as a discrete dimension, and set all monetary fields to Currency (USD), all customer counts to Number (whole).
-3. Create a year filter. Display KPIs for total revenue, new customer revenue, existing-customer growth, attrition revenue, total customers, new customers, and lost customers.
-4. Add a line chart for total revenue by year, a grouped bar chart for new vs lost customers (2016–2017), and bars for new revenue vs existing revenue (2016–2017).
-5. Label 2015 comparison KPIs as N/A (no 2014 baseline), and prominently show the selected year.
-6. Publish to Tableau Public, verify it is accessible in a signed-out browser, and add its URL below.
+- **SQL:** Analyzing customer and revenue data
+- **Python:** Processing and validating the results
+- **Tableau:** Building a dashboard to visualize the findings
+- **GitHub:** Organizing and sharing the project
 
-**Tableau Public URL:** [add after publishing]
-**GitHub repository URL:** [add after uploading]
+## My Approach
 
-**Privacy:** Upload only aggregate results and scripts. Do not publish the original CSV or ZIP because they contain email-like identifiers.
+I started by working through the data using SQL to calculate key customer and revenue metrics. I then used Python to help process and check the results before bringing the summarized data into Tableau.
+
+In Tableau, I focused on keeping the dashboard simple and easy to follow. I wanted someone looking at it for the first time to quickly understand how the business was performing without having to sort through a large amount of data.
+
+## Tableau Dashboard
+
+The dashboard covers customer and revenue performance from 2015 to 2017.
+
+It includes:
+
+- Total revenue and total customers
+- Annual revenue trends
+- New customers compared to lost customers
+- Revenue generated by new and existing customers
+
+I organized the visualizations to make it easier to compare performance across different years and identify changes in customer activity.
+
+## Project Links
+
+**Tableau Public Dashboard:** [Paste your Tableau link here]
+
+**GitHub Repository:** [Paste your GitHub link here]
+
+## Data Privacy
+
+I used summarized data for the dashboard and did not include the original customer-level dataset in this repository to protect sensitive information.
+
+## Final Thoughts
+
+This project gave me an opportunity to bring together SQL, Python, and Tableau in one analysis. It also helped me practice presenting data in a way that is clear, organized, and useful for understanding business performance.
