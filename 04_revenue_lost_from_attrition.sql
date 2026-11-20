@@ -1,0 +1,2 @@
+-- Run after executing setup.sql. First year has no prior-year baseline where relevant.
+SELECT y.year, ROUND(SUM(CASE WHEN c.customer_email IS NULL THEN p.revenue_cents ELSE 0 END) / 100.0, 2) AS revenue_lost_from_attrition FROM (SELECT DISTINCT year FROM customer_year) y JOIN customer_year p ON p.year = y.year - 1 LEFT JOIN customer_year c ON c.year = y.year AND c.customer_email = p.customer_email GROUP BY y.year ORDER BY y.year;

@@ -1,0 +1,16 @@
+{
+  "input_rows": 685927,
+  "normalized_email_rows": 270214,
+  "year_order_counts": {
+    "2015": 231294,
+    "2016": 204646,
+    "2017": 249987
+  },
+  "unique_customer_year_pairs": 685927,
+  "years": [
+    2015,
+    2016,
+    2017
+  ],
+  "tests": "All ten SQL outputs match independently computed Python metrics; revenue and customer reconciliations pass."
+}
